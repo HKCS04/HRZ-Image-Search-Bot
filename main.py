@@ -16,7 +16,7 @@ Bot = Client(
 
 API = "https://apibu.herokuapp.com/api/y-images?query="
 
-force_channel = "TheHRZTG""
+force_channel = "TheHRZTG"
 
 PIC = [
  "https://telegra.ph/file/92440733ad3c34c211531.jpg"
