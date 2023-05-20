@@ -1,11 +1,10 @@
 import os
 import requests
-from pyrogram import Client, filters
-from pyrogram.types import (
-    InlineKeyboardMarkup,
-    InlineKeyboardButton,
-    InlineQueryResultPhoto
-)
+from pyrogram import Client, filters 
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, InlineQueryResultPhoto
+from pyrogram.types import CallbackQuery
+import random
+from pyrogram.errors import UserNotParticipant
 
 
 Bot = Client(
@@ -17,22 +16,92 @@ Bot = Client(
 
 API = "https://apibu.herokuapp.com/api/y-images?query="
 
-START_TEXT = """Hello {},
-I am an image search bot. You can use me in inline.
+force_channel = "TheHRZTG""
 
-Made by @FayasNoushad"""
+PIC = [
+ "https://telegra.ph/file/92440733ad3c34c211531.jpg"
+]
 
+START_TEXT = """ʜᴇʟʟᴏ {},
 
-@Bot.on_message(filters.private & filters.command(["start", "help"]))
-async def start(bot, update):
+ɴɪᴄᴇ ᴛᴏ ᴍᴇᴇᴛ ʏᴏᴜ ᴅᴇᴀʀ 🙌🏻
+ɪᴛ ɪꜱ ᴇᴀꜱʏ ᴛᴏ ᴜꜱᴇ ᴍᴇ ᴊᴜꜱᴛ ᴇɴᴛᴇʀ ᴍʏ ᴜꜱᴇʀɴᴀᴍᴇ ᴀɴᴅ ɪᴍᴀɢᴇ ɴᴀᴍᴇ 🎊
+ꜰᴏʀ ᴍᴏʀᴇ ᴅᴇᴀᴛᴀɪʟꜱ ʜɪᴛ /help...
+
+@TheHRZTG"""
+
+HELP_TEXT = """This bot can help you find and share images. It works automatically, no need to add it anywhere. 
+Simply open any of your chats and type @HRZPicRobot something in the message field. Then tap on a result to send.
+
+For example, try typing @HRZPicRobot funny cat here."""
+
+ABOUT_TEXT = """➥ Name : [HRZ Image Search Bot](http://t.me/HRZPicRobot)
     
-    await update.reply_text(
-        text=START_TEXT.format(update.from_user.mention),
-        disable_web_page_preview=True,
-        quote=True
-    )
+➥ Creator : [HRZ🇮🇳](https://t.me/HRZRobot)
 
+➥ Language : Python3
 
+➥ Library : [Pyrogram V2](https://docs.pyrogram.org/)
+
+➥ Source Code : [Click Here](t.me/TheHRZTG)"""
+
+@Bot.on_message(filters.private & filters.command(["start"]))
+async def start(client, message):
+    if force_channel:
+        try:
+            user = await client.get_chat_member(force_channel, message.from_user.id)
+            if user.status == "kicked out":
+                await message.reply_text("You Are Banned")
+                return
+        except UserNotParticipant :
+            await message.reply_text(
+                text="🔊 Join Our Main Channel to Use Me",
+                reply_markup=InlineKeyboardMarkup( [[
+                 InlineKeyboardButton("🔊 𝗝𝗼𝗶𝗻 𝗢𝘂𝗿 𝗠𝗮𝗶𝗻 𝗰𝗵𝗮𝗻𝗻𝗲𝗹 😁", url=f"t.me/{force_channel}")
+                 ]]
+                 )
+            )
+            return
+    await message.reply_photo(
+        photo=random.choice(PICS),
+        caption=START_TEXT.format(message.from_user.mention),
+        reply_markup=InlineKeyboardButton("ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ", url="t.me/TheHRZTG"),
+            ],[
+            InlineKeyboardButton("ᴅᴇᴠᴇʟᴏᴘᴇʀ", url="t.me/HRZRobot"),
+            ],[
+            InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ", url="t.me/HRZSupport")
+            ]]
+            )
+        )
+
+@Bot.on_message(filters.private & filters.command(["help"]))
+async def help(client, message):
+    await message.reply_photo(
+        photo=random.choice(PICS),
+        caption=HELP_TEXT.format(message.from_user.mention),
+        reply_markup=InlineKeyboardButton("ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ", url="t.me/TheHRZTG"),
+            ],[
+            InlineKeyboardButton("ᴅᴇᴠᴇʟᴏᴘᴇʀ", url="t.me/HRZRobot"),
+            ],[
+            InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ", url="t.me/HRZSupport")
+            ]]
+            )
+        )
+        
+@Bot.on_message(filters.private & filters.command(["about"]))
+async def about(client, message):
+    await message.reply_photo(
+        photo=random.choice(PICS),
+        caption=ABOUT_TEXT.format(message.from_user.mention),
+        reply_markup=InlineKeyboardButton("ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ", url="t.me/TheHRZTG"),
+            ],[
+            InlineKeyboardButton("ᴅᴇᴠᴇʟᴏᴘᴇʀ", url="t.me/HRZRobot"),
+            ],[
+            InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ", url="t.me/HRZSupport")
+            ]]
+            )
+        )
+        
 @Bot.on_message(filters.private & filters.text)
 async def filter_text(bot, update):
     
@@ -62,7 +131,7 @@ async def search(bot, update):
             InlineQueryResultPhoto(
                 title=update.query.capitalize(),
                 description=result,
-                caption="Made by @FayasNoushad",
+                caption="@TheHRZTG",
                 photo_url=result
             )
         )
