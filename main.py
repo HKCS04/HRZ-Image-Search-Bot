@@ -9,9 +9,9 @@ from pyrogram.errors import UserNotParticipant
 
 Bot = Client(
     "Image-Search-Bot",
-    bot_token=os.environ.get("BOT_TOKEN"),
-    api_id=int(os.environ.get("API_ID")),
-    api_hash=os.environ.get("API_HASH")
+    bot_token="6197005764:AAEDM3U2kt96GyiTVmDl4nOsnXlJX3QADNc",
+    api_id="23050566",
+    api_hash="25e954ccd4afb778eea69bd6754275ff"
 )
 
 API = "https://apibu.herokuapp.com/api/y-images?query="
