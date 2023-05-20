@@ -65,7 +65,8 @@ async def start(client, message):
     await message.reply_photo(
         photo=random.choice(PICS),
         caption=START_TEXT.format(message.from_user.mention),
-        reply_markup=InlineKeyboardButton("ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ", url="t.me/TheHRZTG"),
+        reply_markup=InlineKeyboardMarkup( [[
+            InlineKeyboardButton("ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ", url="t.me/TheHRZTG"),
             ],[
             InlineKeyboardButton("ᴅᴇᴠᴇʟᴏᴘᴇʀ", url="t.me/HRZRobot"),
             ],[
@@ -79,7 +80,8 @@ async def help(client, message):
     await message.reply_photo(
         photo=random.choice(PICS),
         caption=HELP_TEXT.format(message.from_user.mention),
-        reply_markup=InlineKeyboardButton("ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ", url="t.me/TheHRZTG"),
+        reply_markup=InlineKeyboardMarkup( [[
+            InlineKeyboardButton("ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ", url="t.me/TheHRZTG"),
             ],[
             InlineKeyboardButton("ᴅᴇᴠᴇʟᴏᴘᴇʀ", url="t.me/HRZRobot"),
             ],[
@@ -93,7 +95,8 @@ async def about(client, message):
     await message.reply_photo(
         photo=random.choice(PICS),
         caption=ABOUT_TEXT.format(message.from_user.mention),
-        reply_markup=InlineKeyboardButton("ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ", url="t.me/TheHRZTG"),
+        reply_markup=InlineKeyboardMarkup( [[
+            InlineKeyboardButton("ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ", url="t.me/TheHRZTG"),
             ],[
             InlineKeyboardButton("ᴅᴇᴠᴇʟᴏᴘᴇʀ", url="t.me/HRZRobot"),
             ],[
